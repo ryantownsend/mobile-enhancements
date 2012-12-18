@@ -1,13 +1,10 @@
 module MobileEnhancements
   class RequestHelper
-    attr_reader :request
+    attr_reader :request, :path_prefix
     
-    def self.path_prefix
-      (MobileEnhancements.configuration.mobile.prefix || "mobile").gsub(/^\/|\/$/, "")
-    end
-    
-    def initialize(request)
+    def initialize(request, path_prefix = nil)
       @request = request
+      @path_prefix = path_prefix || default_path_prefix
     end
     
     # strips any mobile prefix from the url
@@ -30,7 +27,7 @@ module MobileEnhancements
     # ensures a mobile prefix exists in the path
     def mobile_path(path = request.path)
       path.gsub(/^(.*?\/\/.*?)?\/(#{path_prefix}\/?)?(.*)$/) do
-        "#{$1}/#{self.class.path_prefix}/#{$3}"
+        "#{$1}/#{path_prefix}/#{$3}"
       end.freeze
     end
     
@@ -45,8 +42,8 @@ module MobileEnhancements
     end
     
     private
-    def path_prefix
-      @path_prefix ||= self.class.path_prefix
+    def default_path_prefix
+      (MobileEnhancements.configuration.mobile.prefix || "mobile").gsub(/^\/|\/$/, "")
     end
   end
 end
