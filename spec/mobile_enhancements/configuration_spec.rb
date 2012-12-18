@@ -1,4 +1,4 @@
-require "mobile_enhancements/configuration"
+require "mobile_enhancements"
 
 describe MobileEnhancements::Configuration do
   subject do

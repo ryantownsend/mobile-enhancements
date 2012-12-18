@@ -1,4 +1,4 @@
-require "mobile_enhancements/request_helper"
+require "mobile_enhancements"
 
 describe MobileEnhancements::RequestHelper do
   let(:url) do
