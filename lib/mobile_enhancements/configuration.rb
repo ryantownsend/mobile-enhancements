@@ -1,5 +1,9 @@
 module MobileEnhancements
   class Configuration
+    def initialize(&block)
+      instance_eval(&block) if block_given?
+    end
+    
     def mobile(&block)
       @options ||= {}
       @options[__method__] ||= Options.new

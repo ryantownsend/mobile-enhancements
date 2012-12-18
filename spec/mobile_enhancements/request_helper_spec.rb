@@ -1,6 +1,7 @@
 require "mobile_enhancements"
 
 describe MobileEnhancements::RequestHelper do
+  let(:path) { "/" }
   let(:url) do
     "http://example.com#{path}"
   end
@@ -10,7 +11,17 @@ describe MobileEnhancements::RequestHelper do
   end
   
   subject do
-    MobileEnhancements::RequestHelper.new(request)
+    MobileEnhancements::RequestHelper.new(request, "mobile")
+  end
+  
+  describe "::delegated_methods" do
+    it "should return an array of helper methods" do
+      helper_methods = %w(
+        mobile_url mobile_path mobile_request?
+        desktop_url desktop_path desktop_request?
+      )
+      expect(subject.class.delegated_methods.map(&:to_s)).to match_array(helper_methods)
+    end
   end
   
   context "when the URL contains a mobile path prefix" do

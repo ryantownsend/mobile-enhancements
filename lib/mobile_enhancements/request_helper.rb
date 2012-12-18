@@ -1,10 +1,16 @@
 module MobileEnhancements
   class RequestHelper
+    def self.delegated_methods
+      instance_methods.select do |name|
+        name =~ /^(desktop|mobile)\_/
+      end
+    end
+
     attr_reader :request, :path_prefix
-    
-    def initialize(request, path_prefix = nil)
+
+    def initialize(request, path_prefix)
       @request = request
-      @path_prefix = path_prefix || default_path_prefix
+      @path_prefix = path_prefix
     end
     
     # strips any mobile prefix from the url
@@ -39,11 +45,6 @@ module MobileEnhancements
     # returns whether or not this is a desktop request
     def desktop_request?
       !mobile_request?
-    end
-    
-    private
-    def default_path_prefix
-      (MobileEnhancements.configuration.mobile.prefix || "mobile").gsub(/^\/|\/$/, "")
     end
   end
 end
