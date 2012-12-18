@@ -27,11 +27,6 @@ YourApp::Application.routes.draw do
   # this can be accessed via mobile or desktop versions
   mobile_optional do
     resource :items
-    
-    # you can turn-off mobile for particular routes
-    desktop_only do
-      resource :categories
-    end
   end
   
   # this cannot be access via desktop
