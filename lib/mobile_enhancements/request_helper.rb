@@ -1,16 +1,27 @@
+require "forwardable"
+
 module MobileEnhancements
   class RequestHelper
+    extend Forwardable
+    
     def self.delegated_methods
       instance_methods.select do |name|
         name =~ /^(desktop|mobile)\_/
-      end
+      end << :determine_layout
     end
+    
+    def_delegators :configuration, :mobile_path_prefix, :mobile_layout, :desktop_layout
 
-    attr_reader :request, :path_prefix
+    attr_reader :request, :configuration
 
-    def initialize(request, path_prefix)
+    def initialize(request, configuration)
       @request = request
-      @path_prefix = path_prefix
+      @configuration = configuration
+    end
+    
+    # returns a string defining which layout file to use
+    def determine_layout
+      mobile_request? ? mobile_layout : desktop_layout
     end
     
     # strips any mobile prefix from the url
@@ -20,7 +31,7 @@ module MobileEnhancements
 
     # strips any mobile prefix from the path
     def desktop_path(path = request.path)
-      path.gsub(/^(.*?\/\/.*?)?\/(#{path_prefix}\/?)?(.*)$/) do
+      path.gsub(/^(.*?\/\/.*?)?\/(#{mobile_path_prefix}\/?)?(.*)$/) do
         "#{$1}/#{$3}"
       end.freeze
     end
@@ -32,14 +43,14 @@ module MobileEnhancements
 
     # ensures a mobile prefix exists in the path
     def mobile_path(path = request.path)
-      path.gsub(/^(.*?\/\/.*?)?\/(#{path_prefix}\/?)?(.*)$/) do
-        "#{$1}/#{path_prefix}/#{$3}"
+      path.gsub(/^(.*?\/\/.*?)?\/(#{mobile_path_prefix}\/?)?(.*)$/) do
+        "#{$1}/#{mobile_path_prefix}/#{$3}"
       end.freeze
     end
     
     # returns whether or not this is a mobile request
     def mobile_request?
-      @mobile_request ||= !!(request.path =~ /^\/#{path_prefix}(\/.*)?$/)
+      @mobile_request ||= !!(request.path =~ /^\/#{mobile_path_prefix}(\/.*)?$/)
     end
     
     # returns whether or not this is a desktop request

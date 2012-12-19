@@ -13,10 +13,7 @@ module MobileEnhancements
 
     private
     def mobile_enhancement_helpers
-      @mobile_enhancement_helpers ||= begin
-        path_prefix = MobileEnhancements.mobile_prefix
-        RequestHelper.new(request, path_prefix)
-      end
+      @mobile_enhancement_helpers ||= RequestHelper.new(request, MobileEnhancements.configuration)
     end
   end
 end

@@ -1,3 +1,4 @@
+require "mobile_enhancements/configuration"
 require "mobile_enhancements/request_helper"
 
 describe MobileEnhancements::RequestHelper do
@@ -10,22 +11,34 @@ describe MobileEnhancements::RequestHelper do
     mock(:request, url: url, path: path)
   end
   
+  let(:configuration) do
+    MobileEnhancements::Configuration.default
+  end
+  
   subject do
-    MobileEnhancements::RequestHelper.new(request, "mobile")
+    MobileEnhancements::RequestHelper.new(request, configuration)
   end
   
   describe "::delegated_methods" do
-    it "should return an array of helper methods" do
-      helper_methods = %w(
-        mobile_url mobile_path mobile_request?
-        desktop_url desktop_path desktop_request?
-      )
-      expect(subject.class.delegated_methods.map(&:to_s)).to match_array(helper_methods)
+    %w(
+      mobile_url mobile_path mobile_request?
+      desktop_url desktop_path desktop_request?
+      determine_layout
+    ).each do |method|
+      it "should include #{method}" do
+        expect(subject.class.delegated_methods.map(&:to_s)).to include method
+      end
     end
   end
   
   context "when the URL contains a mobile path prefix" do
     let(:path) { "/mobile/items/mobile/iphone" }
+    
+    describe "#determine_layout" do
+      it "should return the mobile layout defined in the config" do
+        expect(subject.determine_layout).to eq configuration.mobile_layout
+      end
+    end
     
     describe "#mobile_url" do
       it "should return the URL untouched" do
@@ -66,6 +79,12 @@ describe MobileEnhancements::RequestHelper do
 
   context "when the URL does not contain a mobile path prefix" do
     let(:path) { "/items/mobile/iphone" }
+    
+    describe "#determine_layout" do
+      it "should return the desktop layout defined in the config" do
+        expect(subject.determine_layout).to eq configuration.desktop_layout
+      end
+    end
     
     describe "#mobile_url" do
       it "should prepend the path with a mobile prefix" do
