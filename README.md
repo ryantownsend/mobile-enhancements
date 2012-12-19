@@ -1,6 +1,13 @@
 This gem provides a few features to a Rails app which aid the production of a mobile-targeted UI.
 
-Firstly, it provides the `mobile_only` and `mobile_optional` blocks to your routes, these let you define particular routes which can only be accessed via your mobile prefix (default: `"/mobile"`) or ones which will work for both desktop and mobile. For details on customising the prefix, and exact usage of the routes helpers, see the "Usage" section below.
+Firstly, it provides the `mobile_only` and `mobile_optional` blocks to your routes, these let you define particular routes which can only be accessed via your mobile prefix (default: `/mobile`) or ones which will work for both desktop and mobile. For details on customising the prefix, and exact usage of the routes helpers, see the "Usage" section below.
+
+[![Build Status][2]][1] [![Code Climate][3]][4]
+
+  [1]: http://travis-ci.org/ryantownsend/mobile-enhancements
+  [2]: https://secure.travis-ci.org/ryantownsend/mobile-enhancements.png?branch=master
+  [3]: https://codeclimate.com/badge.png
+  [4]: https://codeclimate.com/github/ryantownsend/mobile-enhancements
 
 ## Installation
 
