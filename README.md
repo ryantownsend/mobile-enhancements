@@ -39,11 +39,13 @@ YourApp::Application.routes.draw do
 end
 ```
 
-By default the path prefix for mobile routes will be `mobile/`. The app will also use `layouts/mobile(.html.erb)` as the root template unless specified otherwise.
+By default the path prefix for mobile routes will be `mobile/`. The app will also use `layouts/application.mobile.erb` as the root mobile UI template unless specified otherwise.
 
-You can customise these options by creating an initializer, here's an example `config/initializers/mobile_enhancements.rb` file:
+You can customise these options by creating an initializer, here's an example `config/initializers/mobile_enhancements.rb` file (the defaults):
 
 ```ruby
+require "mobile_enhancements"
+
 MobileEnhancements.configure do
   mobile do
     # defines the path prefix used

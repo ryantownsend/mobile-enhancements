@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :guides
+  get "one", to: "test#one"
   
   mobile_optional do
-    resources :items
+    get "two", to: "test#two"
   end
   
   mobile_only do
-    resources :pages
+    get "three", to: "test#three"
   end
 end

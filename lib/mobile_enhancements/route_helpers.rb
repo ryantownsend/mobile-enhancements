@@ -5,7 +5,7 @@ module MobileEnhancements
     # all routes defined within the mobile_only block will require the mobile
     # prefix
     def mobile_only(&block)
-      scope(mobile_path_prefix, &block)
+      scope(mobile_path_prefix, mobile: mobile_path_prefix, &block)
     end
     
     # all routes defined within the mobile_optional block will be accessible
