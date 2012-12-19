@@ -2,6 +2,7 @@ require "mobile_enhancements/version"
 require "mobile_enhancements/configuration"
 require "mobile_enhancements/request_helper"
 require "mobile_enhancements/helper_delegation"
+require "mobile_enhancements/route_helpers"
 
 module MobileEnhancements
   # sets up the default configuration and returns the configuration singleton

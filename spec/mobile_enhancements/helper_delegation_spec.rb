@@ -1,4 +1,4 @@
-require "mobile_enhancements/helper_delegation"
+require "spec_helper"
 
 describe MobileEnhancements::HelperDelegation do
   let(:request) { mock(:request) }

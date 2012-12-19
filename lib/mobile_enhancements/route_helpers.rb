@@ -5,7 +5,7 @@ module MobileEnhancements
     # all routes defined within the mobile_only block will require the mobile
     # prefix
     def mobile_only(&block)
-      scope(mobile_prefix, &block)
+      scope(mobile_path_prefix, &block)
     end
     
     # all routes defined within the mobile_optional block will be accessible
@@ -13,13 +13,13 @@ module MobileEnhancements
     def mobile_optional(&block)
       scope("(:mobile)", {
         defaults: { mobile: nil },
-        mobile: /(#{mobile_prefix})?/
+        mobile: /(#{mobile_path_prefix})?/
       }, &block)
     end
 
     private
-    def mobile_prefix
-      MobileEnhancements.mobile_prefix
+    def mobile_path_prefix
+      MobileEnhancements.configuration.mobile_path_prefix
     end
   end
 end

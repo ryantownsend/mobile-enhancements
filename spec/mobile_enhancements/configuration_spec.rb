@@ -1,4 +1,4 @@
-require "mobile_enhancements/configuration"
+require "spec_helper"
 
 describe MobileEnhancements::Configuration do
   subject do
@@ -27,6 +27,10 @@ describe MobileEnhancements::Configuration do
     
     it "should store the layout" do
       expect(subject.mobile.layout).to eq "mob"
+    end
+    
+    it "should raise method missing for undefined options" do
+      expect { subject.mobile.banana(1,2) }.to raise_error(NoMethodError)
     end
   end
   

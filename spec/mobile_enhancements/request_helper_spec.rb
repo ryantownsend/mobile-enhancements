@@ -1,5 +1,4 @@
-require "mobile_enhancements/configuration"
-require "mobile_enhancements/request_helper"
+require "spec_helper"
 
 describe MobileEnhancements::RequestHelper do
   let(:path) { "/" }
