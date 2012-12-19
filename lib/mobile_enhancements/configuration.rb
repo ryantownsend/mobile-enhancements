@@ -5,7 +5,7 @@ module MobileEnhancements
         mobile do
           prefix "mobile"
           layout "application"
-          mimetype "mobile"
+          format "mobile"
         end
         
         desktop do
@@ -38,6 +38,12 @@ module MobileEnhancements
     
     def desktop_layout
       desktop.layout
+    end
+    
+    def mobile_format
+      if mobile.format && mobile.format.to_sym != :html
+        mobile.format.to_sym
+      end
     end
     
     class Options

@@ -4,6 +4,10 @@ require "mobile_enhancements/request_helper"
 require "mobile_enhancements/helper_delegation"
 require "mobile_enhancements/route_helpers"
 
+if defined?(Rails)
+  require "mobile_enhancements/railtie"
+end
+
 module MobileEnhancements
   # sets up the default configuration and returns the configuration singleton
   def self.configuration

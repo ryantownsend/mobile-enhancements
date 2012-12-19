@@ -46,8 +46,13 @@ You can customise these options by creating an initializer, here's an example `c
 ```ruby
 MobileEnhancements.configure do
   mobile do
+    # defines the path prefix used
     prefix "mobile"
+    # defines the global view file
     layout "mobile"
+    # defines the 'format' in view.format.renderer view filenames,
+    # to use the same HTML as standard actions, simply set to "html"
+    format "mobile"
   end
   
   desktop do
