@@ -6,8 +6,10 @@ module MobileEnhancements
   module HelperDelegation
     def self.included(base)
       base.extend Forwardable
-      base.class_eval do
-        def_delegators :mobile_enhancement_helpers, *RequestHelper.delegated_methods
+      base.def_delegators :mobile_enhancement_helpers, *RequestHelper.delegated_methods
+      # make the methods available as helpers if available
+      if base.respond_to?(:helper_method)
+        base.helper_method *RequestHelper.delegated_methods
       end
     end
 
