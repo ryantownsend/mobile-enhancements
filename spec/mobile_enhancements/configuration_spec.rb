@@ -18,15 +18,23 @@ describe MobileEnhancements::Configuration do
       subject.mobile do
         prefix "m"
         layout "mob"
+        format "mbl"
       end
     end
     
     it "should store the prefix" do
       expect(subject.mobile.prefix).to eq "m"
+      expect(subject.mobile_path_prefix).to eq "m"
     end
     
     it "should store the layout" do
       expect(subject.mobile.layout).to eq "mob"
+      expect(subject.mobile_layout).to eq "mob"
+    end
+    
+    it "should store the format" do
+      expect(subject.mobile.format).to eq "mbl"
+      expect(subject.mobile_format).to eq :mbl
     end
     
     it "should raise method missing for undefined options" do
@@ -43,6 +51,7 @@ describe MobileEnhancements::Configuration do
     
     it "should store the layout" do
       expect(subject.desktop.layout).to eq "desktop"
+      expect(subject.desktop_layout).to eq "desktop"
     end
   end
 end

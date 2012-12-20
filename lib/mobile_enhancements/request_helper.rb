@@ -7,10 +7,10 @@ module MobileEnhancements
     def self.delegated_methods
       instance_methods.select do |name|
         name =~ /^(desktop|mobile)\_/
-      end << :determine_layout
+      end + [:determine_layout, :determine_format]
     end
     
-    def_delegators :configuration, :mobile_path_prefix, :mobile_layout, :desktop_layout
+    def_delegators :configuration, :mobile_path_prefix, :mobile_layout, :desktop_layout, :mobile_format
 
     attr_reader :request, :configuration
 
@@ -22,6 +22,11 @@ module MobileEnhancements
     # returns a string defining which layout file to use
     def determine_layout
       mobile_request? ? mobile_layout : desktop_layout
+    end
+    
+    # returns what format should be used by the request
+    def determine_format
+      mobile_request? ? mobile_format.to_sym : request.format.to_sym
     end
     
     # strips any mobile prefix from the url

@@ -16,6 +16,12 @@ module MobileEnhancements
       if format = MobileEnhancements.configuration.mobile_format
         # register it as an alias to the HTML mime-type
         Mime::Type.register_alias "text/html", format
+        # setup the format calculation
+        ActionController::Base.class_eval do
+          before_filter do |controller|
+            controller.request.format = controller.determine_format
+          end
+        end
       end
     end
 

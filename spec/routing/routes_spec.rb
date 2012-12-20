@@ -1,13 +1,13 @@
 require "spec_helper"
 
 describe "standard routing" do
-  it "routes /guides to guides#index" do
+  it "routes /one to test#one" do
     expect(get: "/one").to route_to("test#one")
   end
 end
 
 describe "mobile-optional routing" do
-  it "routes /items to items#index" do
+  it "routes /two to test#two" do
     expect(get: "/two").to route_to({
       controller: "test",
       action: "two",
@@ -15,7 +15,7 @@ describe "mobile-optional routing" do
     })
   end
   
-  it "routes /mobile/items to mobile#index" do
+  it "routes /#{MobileEnhancements.configuration.mobile_path_prefix}/two to test#two" do
     expect(get: "/#{MobileEnhancements.configuration.mobile_path_prefix}/two").to route_to({
       controller: "test",
       action: "two",
@@ -25,14 +25,22 @@ describe "mobile-optional routing" do
 end
 
 describe "mobile-only routing" do
-  it "does not route /pages to pages#index" do
+  it "does not route /three" do
     expect(get: "/three").not_to be_routable
   end
 
-  it "routes /mobile/pages to pages#index" do
+  it "routes /#{MobileEnhancements.configuration.mobile_path_prefix}/three to test#three" do
     expect(get: "/#{MobileEnhancements.configuration.mobile_path_prefix}/three").to route_to({
       controller: "test",
       action: "three",
+      mobile: MobileEnhancements.configuration.mobile_path_prefix
+    })
+  end
+  
+  it "routes /#{MobileEnhancements.configuration.mobile_path_prefix} to test#four" do
+    expect(get: "/#{MobileEnhancements.configuration.mobile_path_prefix}").to route_to({
+      controller: "test",
+      action: "four",
       mobile: MobileEnhancements.configuration.mobile_path_prefix
     })
   end

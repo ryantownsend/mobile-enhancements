@@ -47,12 +47,25 @@ module MobileEnhancements
     end
     
     class Options
+      # force format to pass through
+      def format(*args)
+        method_missing("format", *args)
+      end
+
+      def read_attribute(name)
+        (@properties ||= {})[name]
+      end
+      
+      def write_attribute(name, value)
+        (@properties ||= {})[name] = value
+      end
+      
       def method_missing(name, *args, &block)
         case args.size
         when 0
-          (@properties ||= {})[name]
+          read_attribute(name)
         when 1
-          (@properties ||= {})[name] = args.first
+          write_attribute(name, args.first)
         else
           super
         end

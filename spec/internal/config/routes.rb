@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   
   mobile_only do
     get "three", to: "test#three"
+    root to: "test#four"
   end
 end

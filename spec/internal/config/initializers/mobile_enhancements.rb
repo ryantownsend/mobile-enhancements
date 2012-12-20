@@ -4,6 +4,6 @@ MobileEnhancements.configure do
   mobile do
     prefix "m"
     layout "application"
-    mime_type "mob"
+    format "mobile"
   end
 end
