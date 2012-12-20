@@ -1,6 +1,7 @@
 require "forwardable"
 require "mobile_enhancements"
 require "mobile_enhancements/request_helper"
+require "mobile_enhancements/url_helper"
 
 module MobileEnhancements
   module HelperDelegation
@@ -11,6 +12,8 @@ module MobileEnhancements
       if base.respond_to?(:helper_method)
         base.helper_method *RequestHelper.delegated_methods
       end
+      # include the UrlHelper
+      base.send(:include, UrlHelper)
     end
 
     private
