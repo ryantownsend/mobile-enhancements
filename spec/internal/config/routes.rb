@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get "five", to: "test#path_checking"
     get "six", to: "test#redirect_checking"
     get "seven", to: "test#fixed_redirect_checking"
+    get "eight", to: "test#path_rendering"
   end
   
   mobile_only do

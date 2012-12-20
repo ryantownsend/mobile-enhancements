@@ -12,6 +12,8 @@ module MobileEnhancements
       ActionController::Base.send(:include, MobileEnhancements::HelperDelegation)
       # setup the layout calculation
       ActionController::Base.layout :determine_layout
+      # include the UrlHelper into action view
+      ActionView::Base.send(:include, UrlHelper)
       # if we have a custom mobile format
       if format = MobileEnhancements.configuration.mobile_format
         # register it as an alias to the HTML mime-type

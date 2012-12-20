@@ -6,6 +6,8 @@ class TestController < ActionController::Base
   alias_method :three, :one
   alias_method :four, :one
   
+  def path_rendering; end
+  
   def path_checking
     render text: optional_mobile_url
   end
