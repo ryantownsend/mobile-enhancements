@@ -31,17 +31,17 @@ In your config/routes.rb file:
 
 ```ruby
 YourApp::Application.routes.draw do
-  # this can be accessed via mobile or desktop versions
+  # accessible via /items and /mobile/items
   mobile_optional do
     resource :items
   end
   
-  # this cannot be access via desktop
+  # only accessible via /mobile/barcode_scanner
   mobile_only do
     get :barcode_scanner, to: "scans#new"
   end
   
-  # normal routes are desktop-only
+  # only accessible via /guides (normal routing)
   resource :guides
 end
 ```
