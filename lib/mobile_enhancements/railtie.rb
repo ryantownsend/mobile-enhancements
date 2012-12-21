@@ -6,7 +6,7 @@ require "rails/railtie"
 module MobileEnhancements
   class Railtie < Rails::Railtie
 
-    config.to_prepare do
+    config.after_initialize do
       # setup our route helpers
       ActionDispatch::Routing::Mapper.send(:include, MobileEnhancements::RouteHelpers)
       # setup the path helpers
