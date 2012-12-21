@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   
   mobile_only do
     get "three", to: "test#three"
+    get "nine", to: "test#mobile_to_desktop_path"
     root to: "test#four"
   end
 end

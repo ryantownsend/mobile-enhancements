@@ -19,4 +19,6 @@ class TestController < ActionController::Base
   def fixed_redirect_checking
     redirect_to(mobile_url(optional_mobile_url))
   end
+  
+  def mobile_to_desktop_path; end
 end

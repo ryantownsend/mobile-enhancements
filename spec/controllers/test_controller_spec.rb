@@ -47,6 +47,14 @@ describe TestController do
         expect(response).to redirect_to "http://test.host/#{MobileEnhancements.configuration.mobile_path_prefix}/two"
       end
     end
+    
+    describe "GET /#{MobileEnhancements.configuration.mobile_path_prefix}/mobile_to_desktop_path" do
+      before { get :mobile_to_desktop_path, mobile: MobileEnhancements.configuration.mobile_path_prefix }
+      
+      it "should render a desktop URL" do
+        expect(response.body).to eq "/one"
+      end
+    end
   end
   
   context "via the desktop UI" do
