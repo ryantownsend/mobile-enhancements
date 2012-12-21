@@ -1,5 +1,6 @@
 require "mobile_enhancements/route_helpers"
 require "mobile_enhancements/helper_delegation"
+require "mobile_enhancements/url_helper"
 require "rails/railtie"
 
 module MobileEnhancements
