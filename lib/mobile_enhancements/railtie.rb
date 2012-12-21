@@ -21,10 +21,8 @@ module MobileEnhancements
         # setup the format calculation
         ActionController::Base.class_eval do
           before_filter do |controller|
-            if controller.mobile_request?
-              controller.request.format = controller.determine_format
-              controller.params["mobile"] = MobileEnhancements.configuration.mobile_path_prefix
-            end
+            controller.request.format = controller.determine_format
+            controller.params["mobile"] = controller.mobile_param_value
           end
         end
       end

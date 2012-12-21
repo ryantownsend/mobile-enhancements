@@ -29,6 +29,11 @@ module MobileEnhancements
       mobile_request? ? mobile_format.to_sym : request.format.to_sym
     end
     
+    # returns what the value of the mobile parameter should be
+    def mobile_param_value
+      mobile_request? ? mobile_path_prefix : nil
+    end
+    
     # strips any mobile prefix from the url
     def desktop_url(url = request.url)
       desktop_path(url)
