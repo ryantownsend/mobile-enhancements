@@ -70,7 +70,11 @@ MobileEnhancements.configure do
 end
 ```
 
-Note, in your application controller, a `determine_layout` method will be defined which will choose which layout file it needs, if you want to override this in your own controllers, you can always use `super` to reference the original.
+Notes
+
+1) in your application controller, a `determine_layout` method will be defined which will choose which layout file it needs, if you want to override this in your own controllers, you can always use `super` to reference the original.
+
+2) if you use a `format` like "mobile", instead of "html", then you'll need to update your controller's `respond_to :html, :json` method to include `mobile` in the list (or whatever you choose for your format)
 
 A few helper methods are also provided (accessible both by your views and controllers):
 
